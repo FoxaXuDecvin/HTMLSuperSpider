@@ -53,11 +53,15 @@ string cutpathheadQ(string DATA) {
 
 
 void autospider(string url) {
+    if (url == "") {
+        return;
+    }
+
     if (checkChar(url, "?")) {
         url = cutpathheadQ(url);
     }
 
-    savebuffer = ReplaceChar(url, "https://", "");
+    savebuffer = savepath + "\\" + ReplaceChar(url, "https://", "");
     savebuffer = ReplaceChar(savebuffer, "http://", "");
 
     pathbuffer = cutpathhead(savebuffer);
@@ -69,7 +73,7 @@ void autospider(string url) {
     if (check_file_existence(savebuffer.c_str()) == true) {
         return;
     }
-    
+
     URLDown(url, savebuffer);
 
     if (check_file_existence(savebuffer.c_str()) == false) {
@@ -99,53 +103,75 @@ void autospider(string url) {
         }
 
         string tempbufferA, tempbufferB;
-        //Mutil Spider
-        int maxquos = charTotal(getbufferdata, "\'");
-        if (maxquos == 0) goto checkquo2;
+        
+        //RollCommand
+        int maxsmqt = charTotal(getbufferdata, "\'");
+        for (int cmdreader = 1; maxsmqt > 1;cmdreader++) {
+            tempbufferA = PartReadA(getbufferdata, "\'", "\'", cmdreader);
+            maxsmqt--;
+            maxsmqt--;
+            int tbaBuffer = 0;
+            if (checkChar(tempbufferA, "https://")) {
+                tbaBuffer = 1;
+            }
+            if (checkChar(tempbufferA, "http://")) {
+                tbaBuffer = 1;
+            }
+            if (tempbufferA == "pra.failed mark") {
+                continue;
+            }
+            if (tempbufferA == "notfoundstart") {
+                continue;
+            }
+            if (tempbufferA == "sizeoutStart") {
+                continue;
+            }
+            if (tempbufferA == "sizeoutEnd") {
+                continue;
+            }
 
-        maxquos = maxquos / 2;
-
-        for (int currentProcess = 1;currentProcess < maxquos;currentProcess++) {
-            tempbufferA = PartReadA(getbufferdata, "\'", "\'", currentProcess);
-            urltempbuffer = "nullurl";
-            if (checkChar(tempbufferA, "https://") == 1) {
-                urltempbuffer = "1";
+            if (tbaBuffer == 1) {
+                autospider(tempbufferA);
+                continue;
             }
-            if (checkChar(tempbufferA, "http://") == 1) {
-                urltempbuffer = "1";
+            else {
+                continue;
             }
-            if (checkChar(tempbufferA, "\'//") == 1) {
-                tempbufferA = "https:" + tempbufferA;
-                urltempbuffer = "1";
-            }
-            if (urltempbuffer == "nullurl")continue;
-            autospider(tempbufferA);
-            continue;
         }
-
-    checkquo2:
-        maxquos = charTotal(getbufferdata, "\"");
-        if (maxquos == 0)  continue;
-
-        maxquos = maxquos / 2;
-
-        for (int currentProcess = 1; currentProcess < maxquos; currentProcess++) {
-            tempbufferA = PartReadA(getbufferdata, "\"", "\"", currentProcess);
-            urltempbuffer = "nullurl";
-            if (checkChar(tempbufferA, "https://") == 1) {
-                urltempbuffer = "1";
+        //RollSmallQT
+        int maxbgqt = charTotal(getbufferdata, "\"");
+        for (int cmdreader = 1; maxbgqt > 1; cmdreader++) {
+            tempbufferA = PartReadA(getbufferdata, "\"", "\"", cmdreader);
+            maxbgqt--;
+            maxbgqt--;
+            int tbaBuffer = 0;
+            if (checkChar(tempbufferA, "https://")) {
+                tbaBuffer = 1;
             }
-            if (checkChar(tempbufferA, "http://") == 1) {
-                urltempbuffer = "1";
+            if (checkChar(tempbufferA, "http://")) {
+                tbaBuffer = 1;
             }
-            if (checkChar(tempbufferA, "\"//") == 1) {
-                tempbufferA = "https:" + tempbufferA;
-                urltempbuffer = "1";
+            if (tempbufferA == "pra.failed mark") {
+                continue;
             }
-            if (urltempbuffer == "nullurl")continue;
-            autospider(tempbufferA);
-            continue;
+            if (tempbufferA == "notfoundstart") {
+                continue;
+            }
+            if (tempbufferA == "sizeoutStart") {
+                continue;
+            }
+            if (tempbufferA == "sizeoutEnd") {
+                continue;
+            }
+
+            if (tbaBuffer == 1) {
+                autospider(tempbufferA);
+                continue;
+            }
+            else {
+                continue;
+            }
         }
-	}
+    }
     return;
 }

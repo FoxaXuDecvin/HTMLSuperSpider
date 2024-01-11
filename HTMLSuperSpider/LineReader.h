@@ -134,7 +134,7 @@ string PartRead(string Info, string StartMark, string EndMark) {
 	for (; readbufferPR != StartMark; readptr++) {
 		if (readptr > MaxInfoSize) {
 			//cout << "Message :  " << Info << endl;
-			return "notfoundstart :  " + Info;
+			return "notfoundstart";
 		}
 		readbufferPR = Info[readptr];
 	}
@@ -150,7 +150,7 @@ SKIPGETMARKSTART:
 	}
 	for (; readbufferPR != EndMark; readptr++) {
 		if (readptr > MaxInfoSize) {
-			return "notfoundEnd :  " + Info;
+			return "notfoundEnd";
 		}
 		readbufferPR = Info[readptr];
 	}

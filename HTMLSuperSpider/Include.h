@@ -9,7 +9,7 @@
 
 using namespace std;
 
-string savepath;
+const string savepath = "HSS-GET";
 string spdurl;
 
 int SpawnRandomNum(int min, int max) {

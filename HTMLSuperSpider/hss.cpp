@@ -25,8 +25,6 @@ int main(int argc, char* argv[]) {
 		goto SKIPPARAMTR;
 	}
 
-	savepath = ".\\HTML-Super-Spider";
-
 	winapi_mkdir(savepath);
 
 	spdurl = argv[arlng];

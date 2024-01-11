@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 	int arlng = 1;
 	if (argc != 2) {
 	    printf("HTML Super Spider .\n");
-		printf("FORMAT\n");
+		printf("FORMAT BY FoxaXu\n");
 		printf("         HSS.exe <urlspider>\n");
 		printf("Copyright FoxaXu 2024\n");
 		cout << endl;
